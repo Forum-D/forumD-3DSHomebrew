@@ -1,10 +1,17 @@
-#ifndef _USER_H_
-#define _USER_H_
+#ifndef USER_H
+#define USER_H
 
-// initialise les utilisateurs
-void initUser();
+#include <string>
 
-// attend l'interaction de l'utilisateur
-void userInput();
+class User {
+public:
+    User(const std::string &name);
+    void show();
+    void registerUser();
+    void loginUser();
 
-#endif // _USER_H_
+private:
+    std::string name;
+};
+
+#endif

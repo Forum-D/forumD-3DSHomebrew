@@ -1,15 +1,16 @@
-#ifndef _MENU_H_
-#define _MENU_H_
+#ifndef MENU_H
+#define MENU_H
 
-// déclaration des options de menu
-extern char* menuOption1;
-extern char* menuOption2;
-extern char* menuOption3;
+#include <string>
 
-// initialise le menu
-void initMenu();
+class Menu {
+public:
+    Menu(const std::string &name);
+    void show();
+    void connectToServer();
 
-// dessine le menu
-void drawMenu();
+private:
+    std::string name;
+};
 
-#endif // _MENU_H_
+#endif

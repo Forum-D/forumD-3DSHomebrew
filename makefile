@@ -1,29 +1,19 @@
-CC=devkitpro-gcc
+CC = devkitARM/bin/arm-none-eabi-g++
+CFLAGS = -g -Wall -O2
 
-CFLAGS=-std=gnu99 -Wall -O2 -march=armv6k -mtune=mpcore -mfloat-abi=hard
+all: ForumD.3dsx
 
-OBJ=main.o gfx.o menu.o user.o
+ForumD.3dsx: main.o menu.o gfx.o user.o
+	$(CC) $(CFLAGS) $^ -o $@
 
-forumD.3ds : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o forumD.3ds
+main.o: main.cpp menu.h
+	$(CC) $(CFLAGS) -c $<
 
-forumD.3dsx : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o forumD.3dsx
+menu.o: menu.cpp menu.h
+	$(CC) $(CFLAGS) -c $<
 
-main.o : main.cpp
-	$(CC) $(CFLAGS) -c main.cpp
+gfx.o: gfx.cpp gfx.h
+	$(CC) $(CFLAGS) -c $<
 
-gfx.o : gfx.cpp
-	$(CC) $(CFLAGS) -c gfx.cpp
-
-menu.o : menu.cpp
-	$(CC) $(CFLAGS) -c menu.cpp
-
-user.o : user.cpp
-	$(CC) $(CFLAGS) -c user.cpp
-
-forumD.cia : forumD.3ds
-	3dstool -cvtf cia forumD.3ds forumD.cia
-
-clean:
-	rm -f *.o forumD.3ds forumD.3dsx forumD.cia
+user.o: user.cpp user.h
+	$(CC) $(CFLAGS) -c $<
